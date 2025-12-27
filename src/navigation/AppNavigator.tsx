@@ -9,6 +9,8 @@ import ExamsScreen from "../screens/ExamsScreen";
 import CompanionScreen from "../screens/CompanionScreen";
 import TodoScreen from "../screens/TodoScreen";
 import ExamCountdownScreen from "../screens/ExamCountdownScreen";
+import RiskDetailsScreen from "../screens/RiskDetailsScreen";
+import SubjectRiskScreen from "../screens/SubjectRiskScreen";
 
 export type RootStackParamList = {
   StudentSelector: undefined;
@@ -20,9 +22,11 @@ export type RootStackParamList = {
   Companion: { studentId: string };
   Todo: { studentId: string };
   ExamCountdown: { studentId: string };
-
+  RiskDetails: { studentId: string };
+  SubjectRisk: { studentId: string };
 
 };
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -77,6 +81,17 @@ export default function AppNavigator() {
   component={ExamCountdownScreen}
   options={{ title: "Exam Countdown" }}
 />
+<Stack.Screen
+  name="RiskDetails"
+  component={RiskDetailsScreen}
+  options={{ title: "Risk Analysis" }}
+/>
+<Stack.Screen
+  name="SubjectRisk"
+  component={SubjectRiskScreen}
+  options={{ title: "Subject Risk" }}
+/>
+
 
     </Stack.Navigator>
   );

@@ -17,9 +17,9 @@ export const STUDENTS: Student[] = [
     ],
 
     attendance: [
-      { subjectCode: "AI", percentage: 95 },
-      { subjectCode: "ML", percentage: 93 },
-      { subjectCode: "SE", percentage: 92 },
+      { subjectCode: "AI", classesConducted: 48, classesAttended: 46 },
+      { subjectCode: "ML", classesConducted: 48, classesAttended: 45 },
+      { subjectCode: "SE", classesConducted: 48, classesAttended: 44 },
     ],
 
     assignments: [
@@ -102,9 +102,9 @@ export const STUDENTS: Student[] = [
     ],
 
     attendance: [
-      { subjectCode: "DS", percentage: 82 },
-      { subjectCode: "OOP", percentage: 78 },
-      { subjectCode: "CO", percentage: 76 },
+      { subjectCode: "DS", classesConducted: 46, classesAttended: 36 },
+      { subjectCode: "OOP", classesConducted: 46, classesAttended: 35 },
+      { subjectCode: "CO", classesConducted: 46, classesAttended: 34 },
     ],
 
     assignments: [
@@ -185,9 +185,9 @@ export const STUDENTS: Student[] = [
     ],
 
     attendance: [
-      { subjectCode: "CN", percentage: 68 },
-      { subjectCode: "OS", percentage: 65 },
-      { subjectCode: "DBMS", percentage: 72 },
+      { subjectCode: "CN", classesConducted: 44, classesAttended: 29 },
+      { subjectCode: "OS", classesConducted: 44, classesAttended: 28 },
+      { subjectCode: "DBMS", classesConducted: 44, classesAttended: 31 },
     ],
 
     assignments: [

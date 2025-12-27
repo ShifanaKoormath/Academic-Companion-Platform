@@ -17,11 +17,13 @@ export default function AppHeader() {
           </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("StudentSelector")}
-        >
-          <Text style={styles.switch}>Switch</Text>
-        </TouchableOpacity>
+   <TouchableOpacity
+  onPress={() => navigation.navigate("StudentSelector")}
+  activeOpacity={0.7}
+>
+  <Text style={styles.logout}>Logout</Text>
+</TouchableOpacity>
+
       </View>
     </View>
   );
@@ -61,4 +63,10 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     opacity: 0.85,
   },
+  logout: {
+  fontSize: 13,
+  fontWeight: "600",
+  color: COLORS.danger, // subtle red → logout semantics
+},
+
 });

@@ -16,10 +16,10 @@ export interface Subject {
 /* =========================
    ATTENDANCE
    ========================= */
-
 export interface Attendance {
   subjectCode: string;
-  percentage: number;
+  classesConducted: number;
+  classesAttended: number;
 }
 
 /* =========================
