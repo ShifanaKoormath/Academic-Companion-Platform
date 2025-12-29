@@ -4,24 +4,28 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { getStudentById } from "../data/mockAcademicData";
-import { COLORS } from "../ui/colors";
 import Screen from "../ui/Screen";
 import AppHeader from "../ui/AppHeader";
-
+import { COLORS } from "../ui/colors";
+import { getStudentById } from "../data/mockAcademicData";
 import { calculateInternalMarks } from "../logic/internalCalculation";
 import { calculateAcademicRisk } from "../logic/riskEngine";
 
 export default function DashboardScreen({ route, navigation }: any) {
   const student = getStudentById(route.params.studentId);
 
-  /* ================= ATTENDANCE CALC ================= */
+  /* ================= ATTENDANCE ================= */
 
-  const attendancePercentages = student.attendance.map((a) =>
-    Math.round((a.classesAttended / a.classesConducted) * 100)
+  const attendancePercentages = student.attendance.map(
+    (a) =>
+      Math.round(
+        (a.classesAttended / a.classesConducted) * 100
+      )
   );
 
-  const minAttendance = Math.min(...attendancePercentages);
+  const minAttendance = Math.min(
+    ...attendancePercentages
+  );
 
   const attendanceStatus =
     minAttendance >= 85
@@ -30,14 +34,19 @@ export default function DashboardScreen({ route, navigation }: any) {
       ? { hint: "Borderline", color: COLORS.warning }
       : { hint: "At Risk", color: COLORS.danger };
 
-  /* ================= INTERNALS CALC ================= */
+  /* ================= INTERNALS ================= */
 
-  const internalTotals = student.subjects.map((subject) =>
-    calculateInternalMarks(student, subject.code).total
+  const internalTotals = student.subjects.map(
+    (subject) =>
+      calculateInternalMarks(
+        student,
+        subject.code
+      ).total
   );
 
   const avgInternal = Math.round(
-    internalTotals.reduce((a, b) => a + b, 0) / internalTotals.length
+    internalTotals.reduce((a, b) => a + b, 0) /
+      internalTotals.length
   );
 
   const internalStatus =
@@ -47,34 +56,44 @@ export default function DashboardScreen({ route, navigation }: any) {
       ? { hint: "Average", color: COLORS.warning }
       : { hint: "Weak", color: COLORS.danger };
 
-  /* ================= ACADEMIC RISK ================= */
+  /* ================= RISK ================= */
 
-  const risk = calculateAcademicRisk(student, avgInternal);
+  const risk = calculateAcademicRisk(
+    student,
+    avgInternal
+  );
 
   return (
     <>
       <AppHeader />
 
       <Screen>
-        {/* ================= GREETING ================= */}
+        {/* ---------- GREETING ---------- */}
         <View style={styles.greetingBlock}>
           <Text style={styles.greeting}>
-            Good day, <Text style={styles.name}>{student.name}</Text> 👋
+            Good day,{" "}
+            <Text style={styles.name}>
+              {student.name}
+            </Text>{" "}
+            👋
           </Text>
 
           <Text style={styles.subGreeting}>
-            Semester {student.semester} · {student.department}
+            Semester {student.semester} ·{" "}
+            {student.department}
           </Text>
         </View>
 
-        {/* ================= URGENT SIGNALS ================= */}
+        {/* ---------- ALERTS ---------- */}
         <View style={styles.alertColumn}>
           <AlertCard
             title="To-Do"
             subtitle="Tasks need attention"
             color={COLORS.warning}
             onPress={() =>
-              navigation.navigate("Todo", { studentId: student.id })
+              navigation.navigate("Todo", {
+                studentId: student.id,
+              })
             }
           />
 
@@ -90,8 +109,10 @@ export default function DashboardScreen({ route, navigation }: any) {
           />
         </View>
 
-        {/* ================= SNAPSHOT ================= */}
-        <Text style={styles.sectionTitle}>Academic Snapshot</Text>
+        {/* ---------- SNAPSHOT ---------- */}
+        <Text style={styles.sectionTitle}>
+          Academic Snapshot
+        </Text>
 
         <View style={styles.snapshotRow}>
           <SnapshotCard
@@ -119,7 +140,7 @@ export default function DashboardScreen({ route, navigation }: any) {
           />
         </View>
 
-        {/* ================= RISK SNAPSHOT ================= */}
+        {/* ---------- RISK ---------- */}
         <View style={{ marginTop: 14 }}>
           <SnapshotCard
             label="Academic Risk"
@@ -140,8 +161,31 @@ export default function DashboardScreen({ route, navigation }: any) {
           />
         </View>
 
-        {/* ================= NAVIGATION ================= */}
-        <Text style={styles.sectionTitle}>Academic Modules</Text>
+        {/* ---------- STUDY FOCUS CTA ---------- */}
+        <Text style={styles.sectionTitle}>
+          Study Planning
+        </Text>
+
+        <TouchableOpacity
+          style={styles.dashboardCard}
+          onPress={() =>
+            navigation.navigate("StudyFocus", {
+              studentId: student.id,
+            })
+          }
+        >
+          <Text style={styles.dashboardTitle}>
+            Study Focus
+          </Text>
+          <Text style={styles.dashboardSub}>
+            Priority topics based on exam patterns
+          </Text>
+        </TouchableOpacity>
+
+        {/* ---------- MODULES ---------- */}
+        <Text style={styles.sectionTitle}>
+          Academic Modules
+        </Text>
 
         {[
           ["Tasks", "Tasks"],
@@ -157,7 +201,9 @@ export default function DashboardScreen({ route, navigation }: any) {
               })
             }
           >
-            <Text style={styles.navText}>{label}</Text>
+            <Text style={styles.navText}>
+              {label}
+            </Text>
           </TouchableOpacity>
         ))}
       </Screen>
@@ -167,24 +213,56 @@ export default function DashboardScreen({ route, navigation }: any) {
 
 /* ================= COMPONENTS ================= */
 
-function AlertCard({ title, subtitle, color, onPress }: any) {
+function AlertCard({
+  title,
+  subtitle,
+  color,
+  onPress,
+}: any) {
   return (
     <TouchableOpacity
-      style={[styles.alertCard, { borderLeftColor: color }]}
+      style={[
+        styles.alertCard,
+        { borderLeftColor: color },
+      ]}
       onPress={onPress}
     >
-      <Text style={styles.alertTitle}>{title}</Text>
-      <Text style={styles.alertSub}>{subtitle}</Text>
+      <Text style={styles.alertTitle}>
+        {title}
+      </Text>
+      <Text style={styles.alertSub}>
+        {subtitle}
+      </Text>
     </TouchableOpacity>
   );
 }
 
-function SnapshotCard({ label, value, hint, color, onPress }: any) {
+function SnapshotCard({
+  label,
+  value,
+  hint,
+  color,
+  onPress,
+}: any) {
   return (
-    <TouchableOpacity style={styles.snapshotCard} onPress={onPress}>
-      <Text style={styles.snapshotLabel}>{label}</Text>
-      <Text style={[styles.snapshotValue, { color }]}>{value}</Text>
-      <Text style={styles.snapshotHint}>{hint}</Text>
+    <TouchableOpacity
+      style={styles.snapshotCard}
+      onPress={onPress}
+    >
+      <Text style={styles.snapshotLabel}>
+        {label}
+      </Text>
+      <Text
+        style={[
+          styles.snapshotValue,
+          { color },
+        ]}
+      >
+        {value}
+      </Text>
+      <Text style={styles.snapshotHint}>
+        {hint}
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -272,6 +350,25 @@ const styles = StyleSheet.create({
   snapshotHint: {
     fontSize: 12,
     color: COLORS.textSecondary,
+  },
+
+  dashboardCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+  },
+
+  dashboardTitle: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: COLORS.textPrimary,
+  },
+
+  dashboardSub: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    marginTop: 4,
   },
 
   navCard: {

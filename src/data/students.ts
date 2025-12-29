@@ -9,6 +9,8 @@ export const STUDENTS: Student[] = [
     name: "Meera",
     department: "Computer Science",
     semester: 7,
+      demoPassword: "meera123",
+
 
     subjects: [
       { code: "AI", name: "Artificial Intelligence" },
@@ -94,6 +96,7 @@ export const STUDENTS: Student[] = [
     name: "Ananya",
     department: "Computer Science",
     semester: 3,
+      demoPassword: "ananya123",
 
     subjects: [
       { code: "DS", name: "Data Structures" },
@@ -177,6 +180,7 @@ export const STUDENTS: Student[] = [
     name: "Rahul",
     department: "Computer Science",
     semester: 5,
+      demoPassword: "rahul123",
 
     subjects: [
       { code: "CN", name: "Computer Networks" },

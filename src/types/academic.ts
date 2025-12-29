@@ -66,6 +66,9 @@ export interface Student {
   department: string;
   semester: number;
 
+    demoPassword: string; // 👈 ADD THIS
+
+    
   subjects: Subject[];
   attendance: Attendance[];
   assignments: Assignment[];
