@@ -1,11 +1,20 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS } from "./colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 
 export default function AppHeader() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
+
+  function handleLogout() {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      })
+    );
+  }
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
@@ -17,13 +26,12 @@ export default function AppHeader() {
           </Text>
         </View>
 
-   <TouchableOpacity
-  onPress={() => navigation.navigate("StudentSelector")}
-  activeOpacity={0.7}
->
-  <Text style={styles.logout}>Logout</Text>
-</TouchableOpacity>
-
+        <TouchableOpacity
+          onPress={handleLogout}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.logout}>Logout</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -57,16 +65,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  switch: {
+  logout: {
     fontSize: 13,
     fontWeight: "600",
-    color: COLORS.primary,
-    opacity: 0.85,
+    color: COLORS.danger,
   },
-  logout: {
-  fontSize: 13,
-  fontWeight: "600",
-  color: COLORS.danger, // subtle red → logout semantics
-},
-
 });

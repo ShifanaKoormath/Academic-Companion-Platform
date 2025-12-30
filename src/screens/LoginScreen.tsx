@@ -1,113 +1,130 @@
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import Screen from "../ui/Screen";
 import { COLORS } from "../ui/colors";
-import { getStudentById } from "../data/mockAcademicData";
+import { STUDENTS } from "../data/students";
 
-export default function LoginScreen({ route, navigation }: any) {
-  const { studentId } = route.params;
-  const student = getStudentById(studentId);
-
+export default function LoginScreen({ navigation }: any) {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   function handleLogin() {
-    if (password === student.demoPassword) {
-      navigation.replace("Dashboard", { studentId });
-    } else {
-      setError("Invalid credentials (demo)");
+    const student = STUDENTS.find(
+      (s) =>
+        s.name.toLowerCase() === username.toLowerCase() &&
+        s.demoPassword === password
+    );
+
+    if (!student) {
+      setError("Invalid username or password");
+      return;
     }
+
+    navigation.replace("Dashboard", {
+      studentId: student.id,
+    });
   }
 
   return (
     <Screen>
+      {/* ---------- HEADER ---------- */}
       <Text style={styles.title}>Student Login</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.name}>{student.name}</Text>
-        <Text style={styles.meta}>
-          {student.department} · Semester {student.semester}
-        </Text>
+      <Text style={styles.subtitle}>
+        Sign in to access your academic dashboard
+      </Text>
 
-        <TextInput
-          placeholder="Enter demo password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-        />
+      {/* ---------- INPUTS ---------- */}
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        autoCapitalize="none"
+        value={username}
+        onChangeText={setUsername}
+      />
 
-        {error !== "" && (
-          <Text style={styles.error}>{error}</Text>
-        )}
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
 
-        <TouchableOpacity style={styles.btn} onPress={handleLogin}>
-          <Text style={styles.btnText}>Login</Text>
-        </TouchableOpacity>
+      {/* ---------- ERROR ---------- */}
+      {error ? (
+        <Text style={styles.error}>{error}</Text>
+      ) : null}
 
-        <Text style={styles.hint}>
-          Demo only · No real authentication
-        </Text>
-      </View>
+      {/* ---------- ACTION ---------- */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+
+      {/* ---------- FOOTNOTE ---------- */}
+      <Text style={styles.hint}>
+        Authorized access only
+      </Text>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "700",
-    marginBottom: 20,
     color: COLORS.textPrimary,
+    marginBottom: 6,
   },
 
-  card: {
-    backgroundColor: COLORS.card,
-    borderRadius: 18,
-    padding: 20,
-  },
-
-  name: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  meta: {
+  subtitle: {
     fontSize: 13,
     color: COLORS.textSecondary,
-    marginBottom: 14,
+    marginBottom: 20,
   },
 
   input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 12,
+    backgroundColor: COLORS.card,
     padding: 14,
-    marginBottom: 10,
+    borderRadius: 12,
+    marginBottom: 12,
+    fontSize: 14,
+  },
+
+  button: {
+    marginTop: 10,
+    backgroundColor: COLORS.primary,
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "600",
   },
 
   error: {
     color: COLORS.danger,
     fontSize: 12,
-    marginBottom: 8,
-  },
-
-  btn: {
-    backgroundColor: COLORS.primary,
-    padding: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
-
-  btnText: {
-    color: "#fff",
-    fontWeight: "600",
+    marginBottom: 6,
   },
 
   hint: {
-    marginTop: 12,
     fontSize: 11,
     color: COLORS.textSecondary,
+    marginTop: 16,
     textAlign: "center",
   },
 });

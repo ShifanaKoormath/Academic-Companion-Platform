@@ -190,7 +190,7 @@ export default function DashboardScreen({ route, navigation }: any) {
         {[
           ["Tasks", "Tasks"],
           ["Exams Schedule", "Exams"],
-          ["Academic Companion", "Companion"],
+          ["AI Insights", "Companion"],
         ].map(([label, screen]) => (
           <TouchableOpacity
             key={screen}

@@ -1,236 +1,306 @@
-Acadmate — AI-Powered Academic Companion (Prototype)
 
-Acadmate is a demo-ready academic companion application designed to assist students in tracking and understanding their academic standing using clear logic, realistic data, and explainable insights.
 
-This project is built as a prototype layer that can conceptually integrate with existing Learning Management Systems (LMS) such as ETLab, without replacing them.
+# 📘 Acadmate — AI-Powered Academic Companion (Prototype)
 
-🎯 Project Objective
+Acadmate is a **demo-ready academic companion application** designed to help students **understand, anticipate, and act on their academic standing** using clear rules, realistic data, and explainable insights.
 
-Most academic portals only display raw data (attendance %, marks, deadlines) without explaining academic consequences.
+This project is intentionally built as a **decision-support layer** that can conceptually integrate with existing Learning Management Systems (LMS) such as **ETLab**, without attempting to replace them.
 
-Acadmate focuses on:
+---
 
-Making academic status understandable
+## 🎯 Project Objective
 
-Showing what matters most
+Most academic portals present **raw academic data** (attendance %, marks, deadlines) but do not explain:
 
-Helping students act before it’s too late
+* What the data means
+* Why it matters
+* What the student should focus on next
 
-Example:
+Acadmate addresses this gap by **interpreting academic data into understandable academic signals**.
 
-Instead of just “Attendance: 76%”
-Acadmate highlights that eligibility risk exists.
+### Example
 
-🧠 Key Features
-1️⃣ Academic Snapshot Dashboard
+Instead of only showing:
 
-Attendance status (Safe / Borderline / At Risk)
+> Attendance: 76%
 
-Internal marks (calculated progressively)
+Acadmate highlights:
 
-Pending academic tasks
+> Eligibility risk exists due to attendance trends.
 
-Exam awareness
+---
 
-All values are computed, not hard-coded.
+## 🧠 Key Features
 
-2️⃣ Attendance Analysis
+### 1️⃣ Academic Snapshot Dashboard
 
-Subject-wise attendance
+A consolidated overview of the student’s academic condition:
 
-Lowest attendance is highlighted (real academic rule)
+* Attendance status *(Safe / Borderline / At Risk)*
+* Internal marks *(progressively calculated)*
+* Pending academic tasks
+* Exam awareness & urgency
 
-Visual clarity over raw numbers
+📌 All values are **computed dynamically**, not hard-coded.
 
-3️⃣ Tasks & Assignments
+---
 
-Pending vs Completed tasks
+### 2️⃣ Attendance Analysis
 
-Due dates shown clearly
+* Subject-wise attendance breakdown
+* Lowest attendance highlighted *(real institutional rule)*
+* Clear visual cues instead of dense numbers
 
-Completed tasks show marks
+Focuses on **interpretability over raw percentages**.
 
-Academic rule stated once per section (no clutter)
+---
 
-4️⃣ Internal Marks Calculation
+### 3️⃣ Tasks & Assignments
 
-Internal marks are calculated as:
+* Pending vs completed tasks
+* Due dates shown clearly
+* Completed tasks show obtained marks
+* Academic rule explained once per section *(no UI clutter)*
 
-Component	Max Marks
-Assignments	15
-Attendance	10
-Series Exams	25
-Total	50
+---
 
-✔ If only Series 1 is completed, internals are projected
-✔ Automatically updates when Series 2 is added
+### 4️⃣ Internal Marks Calculation
 
-5️⃣ Exams Schedule
+Internal assessment is calculated using standard academic components:
 
-Series 1, Series 2, and Final exams
+| Component    | Max Marks |
+| ------------ | --------- |
+| Assignments  | 15        |
+| Attendance   | 10        |
+| Series Exams | 25        |
+| **Total**    | **50**    |
 
-Organized as exam periods
+✔ Progressive calculation supported
+✔ Internals projected if only Series 1 is completed
+✔ Automatically updates when Series 2 data is available
 
-Subject-wise exam dates
+---
 
-Marks shown where available
+### 5️⃣ Exams Schedule
 
-6️⃣ AI Companion (Prototype)
+* Series 1, Series 2, and Final exams
+* Organized into exam periods
+* Subject-wise exam dates
+* Marks displayed where available
 
-Displays academic guidance messages
+---
 
-Currently rule-based (deterministic)
+### 6️⃣ Academic Risk Analysis
 
-Designed to be replaceable with real LLM APIs later
+* Overall academic risk score
+* Subject-wise risk classification
+* Reasons behind each risk clearly stated
+* Designed to be **explainable, not predictive**
 
-🧪 Demo Design (Important)
+---
 
-This application uses:
+### 7️⃣ Risk Timeline (New)
 
-Mock academic datasets
+A chronological view of how academic risk **evolves over time**.
 
-Three students with different academic conditions:
+Shows events such as:
 
-Above Average
+* Attendance threshold changes
+* Internal assessment updates
+* Eligibility risk detection
 
-Average
+📌 Demonstrates that **academic risk is dynamic**, not static.
 
-At Risk
+---
 
-This allows evaluators to clearly see different scenarios without live LMS integration.
+### 8️⃣ Study Focus Module (New)
 
-🧱 Technology Stack
-Frontend
+A focused planning view that answers:
 
-React Native (Expo)
+> *What should the student revise next — and why?*
 
-Works on:
+Includes:
 
-Android (Expo Go)
+#### 🔹 Priority Topics
 
-Web (Browser)
+* Derived from **Previous Year Question (PYQ) patterns**
+* Ranked as High / Medium / Low priority
+* Subject-wise filtering
 
-Navigation
+#### 🔹 Missed Topics (Due to Absence)
 
-React Navigation (Stack)
+* Lists topics missed on absent dates
+* Connects attendance gaps to learning gaps
+* Shown only where absences exist
+  *(Above-average students may show none)*
 
-Data Layer
+This module combines **exam relevance + attendance impact** into one actionable view.
 
-Local mock data (LMS-structured)
+---
 
-No external API dependency
+### 9️⃣ AI Companion (Prototype)
 
-Logic
+* Displays academic guidance messages
+* Currently **rule-based and deterministic**
+* Architecture designed to support real LLM APIs in the future
 
-Deterministic rule-based calculations
+📌 No external AI dependency is used in this prototype.
 
-Fully explainable (viva-friendly)
+---
 
-Styling
+## 🧪 Demo Design (Important)
 
-Custom UI components
+This application uses **structured mock academic datasets** to support clear evaluation.
 
-SafeArea-aware layout
+### Three student profiles are included:
 
-Mobile-first design
+* **Above Average** — stable academic condition
+* **Average** — borderline, recoverable condition
+* **At Risk** — low attendance and cumulative gaps
 
-📂 Project Structure (Simplified)
+This allows evaluators to observe **multiple realistic scenarios** without live LMS integration.
+
+---
+
+## 🧱 Technology Stack
+
+### Frontend
+
+* React Native (Expo)
+
+Runs on:
+
+* Android *(Expo Go)*
+* Web *(browser)*
+
+### Navigation
+
+* React Navigation (Stack)
+
+### Data Layer
+
+* Local mock data structured like LMS outputs
+* No external APIs
+
+### Logic
+
+* Deterministic, rule-based calculations
+* Fully explainable *(viva-friendly)*
+
+### Styling
+
+* Custom reusable UI components
+* SafeArea-aware layout
+* Mobile-first design
+
+---
+
+## 📂 Project Structure (Simplified)
+
+```
 src/
 │
-├── screens/        → App screens (Dashboard, Tasks, Internals, etc.)
-├── logic/          → Academic calculations & rules
+├── screens/        → App screens (Dashboard, Study Focus, Risk Timeline, etc.)
+├── logic/          → Academic rules & calculations
 ├── data/           → Mock academic datasets
-├── ui/             → Reusable UI components & styles
+├── ui/             → Reusable UI components
 ├── types/          → TypeScript definitions
 └── navigation/     → App navigation setup
+```
 
-⚙️ Setup Instructions
-1️⃣ Prerequisites
+---
 
-Node.js (LTS recommended)
+## ⚙️ Setup Instructions
 
-npm or yarn
+### 1️⃣ Prerequisites
 
-Expo Go app (Android) OR web browser
+* Node.js *(LTS recommended)*
+* npm or yarn
+* Expo Go *(Android)* or modern web browser
 
-2️⃣ Install Dependencies
+### 2️⃣ Install Dependencies
+
+```bash
 npm install
+```
 
-3️⃣ Start the Application
+### 3️⃣ Start the Application
+
+```bash
 npm start
-
+```
 
 Then:
 
-Press w → run in browser
+* Press **w** → run in browser
+* OR scan QR code using **Expo Go** (Android)
 
-OR scan QR code using Expo Go (Android)
+### 4️⃣ If Mobile Load Fails (Common Fix)
 
-4️⃣ If Mobile Load Fails (Common Fix)
+```bash
 npx expo start --clear
+```
 
-🧭 How to Demo the Project
+---
 
-Select a student profile
+## 🧭 How to Demo the Project
 
-Observe Academic Snapshot changes
+1. Select a student profile
+2. Observe Academic Snapshot changes
+3. Open Attendance → note lowest-subject logic
+4. Open Internals → observe progressive calculation
+5. Open Study Focus → see priority topics & missed topics
+6. Open Risk Timeline → view academic risk progression
+7. Switch students → observe contrasting academic scenarios
 
-Open Attendance → note lowest subject logic
+---
 
-Open Tasks → pending vs completed + due dates
+## 🚫 Explicit Exclusions (By Design)
 
-Open Internals → progressive calculation
+This prototype **intentionally does NOT include**:
 
-Switch student → see different academic conditions
+* Live LMS integration
+* Automatic data fetching
+* Teacher or admin dashboards
+* App Store / Play Store deployment
+* AI model training
 
-🚫 Explicit Exclusions (By Design)
+These exclusions preserve **clarity, focus, and evaluability**.
 
-This prototype does NOT include:
+---
 
-Live LMS integration
+## 🎓 Academic Relevance
 
-Automatic data fetching
+Acadmate demonstrates:
 
-Teacher or admin dashboards
+* Real academic rule modeling
+* Explainable decision logic
+* Student-centric UI/UX design
+* Practical software engineering practices
 
-App Store / Play Store deployment
+Designed to perform strongly in:
 
-AI model training
+* Project evaluation
+* Viva voce
+* Live demo presentations
 
-These are intentionally excluded to maintain clarity and evaluability.
+---
 
-🎓 Academic Relevance
+## 📌 Future Scope (Optional)
 
-This project demonstrates:
+* Integrate real LMS APIs
+* Replace rule-based companion with LLM APIs
+* Push notifications for academic risk
+* Faculty read-only dashboards
 
-Real academic rule modeling
+---
 
-Clean UI/UX for student clarity
+## 👩‍💻 Author
 
-Explainable decision logic
+**Acadmate**
+Academic Companion — *Prototype Version*
 
-Practical software engineering practices
+Built for **academic demonstration and evaluation**.
 
-It is designed to score well in:
+---
 
-Project evaluation
-
-Viva voce
-
-Demo presentation
-
-📌 Future Scope (Optional)
-
-Integrate real LMS APIs
-
-Replace rule-based companion with LLM API
-
-Push notifications for academic risks
-
-Faculty dashboards
-
-👩‍💻 Author
-
-Acadmate
-Academic Companion — Prototype Version
-Built for academic demonstration and evaluation

@@ -1,6 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import StudentSelectorScreen from "../screens/StudentSelectorScreen";
+/* ================= SCREENS ================= */
+
+import IntroScreen from "../screens/IntroScreen";
+import LoginScreen from "../screens/LoginScreen";
+
 import DashboardScreen from "../screens/DashboardScreen";
 import AttendanceScreen from "../screens/AttendanceScreen";
 import TasksScreen from "../screens/TasksScreen";
@@ -11,13 +15,18 @@ import TodoScreen from "../screens/TodoScreen";
 import ExamCountdownScreen from "../screens/ExamCountdownScreen";
 import RiskDetailsScreen from "../screens/RiskDetailsScreen";
 import SubjectRiskScreen from "../screens/SubjectRiskScreen";
-import RiskTimelineScreen from "../screens/RiskTimelineScreen"; // ✅ FIX 1
+import RiskTimelineScreen from "../screens/RiskTimelineScreen";
 import StudyFocusScreen from "../screens/StudyFocusScreen";
+import ChatbotScreen from "../screens/ChatbotScreen";
 
 /* ================= PARAM TYPES ================= */
 
 export type RootStackParamList = {
-  StudentSelector: undefined;
+  /* Entry flow */
+  Intro: undefined;
+  Login: undefined;
+
+  /* Core student flow */
   Dashboard: { studentId: string };
   Attendance: { studentId: string };
   Tasks: { studentId: string };
@@ -29,8 +38,9 @@ export type RootStackParamList = {
   RiskDetails: { studentId: string };
   SubjectRisk: { studentId: string };
   StudyFocus: { studentId: string };
+  Chatbot: { studentId: string };
 
-  // ✅ FIX 2
+  /* Advanced analysis */
   RiskTimeline: {
     studentId: string;
     subjectCode: string;
@@ -44,15 +54,28 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function AppNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="StudentSelector"
+      initialRouteName="Intro"
       screenOptions={{ headerTitleAlign: "center" }}
     >
+      {/* ================= ENTRY ================= */}
       <Stack.Screen
-        name="StudentSelector"
-        component={StudentSelectorScreen}
-        options={{ title: "Select Student" }}
+        name="Intro"
+        component={IntroScreen}
+        options={{ headerShown: false }}
+      />
+  <Stack.Screen
+  name="Chatbot"
+  component={ChatbotScreen}
+  options={{ title: "AI Query Assistant" }}
+/>
+
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ title: "Login" }}
       />
 
+      {/* ================= CORE FLOW ================= */}
       <Stack.Screen
         name="Dashboard"
         component={DashboardScreen}
@@ -63,13 +86,6 @@ export default function AppNavigator() {
         name="Attendance"
         component={AttendanceScreen}
         options={{ title: "Attendance" }}
-      />
-
-      {/* ✅ Risk Timeline */}
-      <Stack.Screen
-        name="RiskTimeline"
-        component={RiskTimelineScreen}
-        options={{ title: "Risk Timeline" }}
       />
 
       <Stack.Screen
@@ -93,7 +109,7 @@ export default function AppNavigator() {
       <Stack.Screen
         name="Companion"
         component={CompanionScreen}
-        options={{ title: "Academic Companion" }}
+        options={{ title: "AI Insights" }}
       />
 
       <Stack.Screen
@@ -108,6 +124,7 @@ export default function AppNavigator() {
         options={{ title: "Exam Countdown" }}
       />
 
+      {/* ================= RISK & INSIGHTS ================= */}
       <Stack.Screen
         name="RiskDetails"
         component={RiskDetailsScreen}
@@ -119,12 +136,18 @@ export default function AppNavigator() {
         component={SubjectRiskScreen}
         options={{ title: "Subject Risk" }}
       />
-      <Stack.Screen
-  name="StudyFocus"
-  component={StudyFocusScreen}
-  options={{ title: "Study Focus" }}
-/>
 
+      <Stack.Screen
+        name="RiskTimeline"
+        component={RiskTimelineScreen}
+        options={{ title: "Risk Timeline" }}
+      />
+
+      <Stack.Screen
+        name="StudyFocus"
+        component={StudyFocusScreen}
+        options={{ title: "Study Focus" }}
+      />
     </Stack.Navigator>
   );
 }
