@@ -20,6 +20,7 @@ import StudyFocusScreen from "../screens/StudyFocusScreen";
 import ChatbotScreen from "../screens/ChatbotScreen";
 import NotesScreen from "../screens/NotesScreen";
 import LearningGameScreen from "../screens/LearningGameScreen";
+import AITutorScreen from "../screens/AITutorScreen";
 
 /* ================= PARAM TYPES ================= */
 
@@ -39,6 +40,8 @@ export type RootStackParamList = {
   ExamCountdown: { studentId: string };
   StudyFocus: { studentId: string };
   Chatbot: { studentId: string };
+    AITutor: { studentId: string };
+
 Notes: {
   studentId: string;
   subject?: string;
@@ -76,6 +79,7 @@ export default function AppNavigator() {
         component={IntroScreen}
         options={{ headerShown: false }}
       />
+<Stack.Screen name="AITutor" component={AITutorScreen} />
 
       <Stack.Screen
         name="Login"

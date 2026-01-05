@@ -223,6 +223,13 @@ src/
 ```bash
 npm install
 ```
+for gemini ai:
+
+cd backend 
+
+npm install @google/generative-ai
+npm install express cors dotenv @google/generative-ai
+npm install nodemon
 
 ### 3️⃣ Start the Application
 

@@ -10,6 +10,7 @@ import { COLORS } from "../ui/colors";
 import { getStudentById } from "../data/mockAcademicData";
 import { calculateInternalMarks } from "../logic/internalCalculation";
 import { calculateAcademicRisk } from "../logic/riskEngine";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function DashboardScreen({ route, navigation }: any) {
   const student = getStudentById(route.params.studentId);
@@ -239,8 +240,20 @@ export default function DashboardScreen({ route, navigation }: any) {
             </Text>
           </TouchableOpacity>
         ))}
+        <TouchableOpacity
+  style={styles.fab}
+  onPress={() =>
+    navigation.navigate("AITutor", {
+      studentId: student.id,
+    })
+  }
+>
+  <Ionicons name="chatbubble-ellipses" size={22} color="#fff" />
+</TouchableOpacity>
+
       </Screen>
     </>
+    
   );
 }
 
@@ -421,4 +434,27 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     marginTop: 4,
   },
+  fab: {
+  position: "absolute",
+  bottom: 24,
+  right: 20,
+  width: 56,
+  height: 56,
+  borderRadius: 28,
+  backgroundColor: COLORS.primary,
+  justifyContent: "center",
+  alignItems: "center",
+  elevation: 6, // Android
+  shadowColor: "#000", // iOS
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+},
+
+fabText: {
+  color: "#fff",
+  fontWeight: "700",
+  fontSize: 16,
+},
+
 });
