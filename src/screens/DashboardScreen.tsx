@@ -203,6 +203,22 @@ export default function DashboardScreen({ route, navigation }: any) {
             Syllabus-wise revision notes
           </Text>
         </TouchableOpacity>
+          {/* 🎮 Learning Game */}
+<TouchableOpacity
+  style={styles.navCard}
+  onPress={() =>
+    navigation.navigate("LearningGame", {
+      studentId: student.id,
+    })
+  }
+>
+  <Text style={styles.navText}>
+    Learning Game
+  </Text>
+  <Text style={styles.navSub}>
+    Rapid recall quizzes for concept revision
+  </Text>
+</TouchableOpacity>
 
         {[
           ["Tasks", "Tasks"],

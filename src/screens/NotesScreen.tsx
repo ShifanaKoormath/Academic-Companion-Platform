@@ -12,6 +12,9 @@ import Screen from "../ui/Screen";
 import { COLORS } from "../ui/colors";
 import { getStudentById } from "../data/mockAcademicData";
 import { SUBJECT_SYLLABUS } from "../data/subjectSyllabus";
+import { makeNoteKey } from "../utils/noteKey";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/AppNavigator";
 
 const STORAGE_KEY = "STUDENT_NOTES_V2";
 
@@ -20,7 +23,12 @@ type Note = {
   pinned: boolean;
 };
 
-export default function NotesScreen({ route }: any) {
+type Props = NativeStackScreenProps<
+  RootStackParamList,
+  "Notes"
+>;
+
+export default function NotesScreen({ route, navigation }: Props) {
   const student = getStudentById(route.params.studentId);
 
   const [activeSubject, setActiveSubject] = useState(
@@ -34,6 +42,25 @@ export default function NotesScreen({ route }: any) {
   const [search, setSearch] = useState("");
 
   const syllabus = SUBJECT_SYLLABUS[activeSubject];
+  /* ---------- HANDLE NAVIGATION PARAMS ---------- */
+  useEffect(() => {
+    if (!route.params) return;
+
+    const { subject, module, topic } = route.params;
+
+    if (subject) {
+      setActiveSubject(subject);
+    }
+
+    if (module) {
+      setOpenModule(module);
+    }
+
+    if (subject && module && topic) {
+      const key = makeNoteKey(subject, module, topic);
+      setOpenTopic(key);
+    }
+  }, [route.params]);
 
   /* ---------- LOAD + MIGRATE ---------- */
   useEffect(() => {
@@ -58,9 +85,16 @@ export default function NotesScreen({ route }: any) {
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   }
 
-  function topicKey(subject: string, module: string, topic: string) {
-    return `${subject}||${module}||${topic}`;
-  }
+
+function topicKey(
+  subject: string,
+  module: string,
+  topic: string
+): string {
+  return makeNoteKey(subject, module, topic);
+}
+
+
 
   function parseKey(key: string) {
     const [subject, module, topic] = key.split("||");
@@ -269,16 +303,35 @@ export default function NotesScreen({ route }: any) {
                                 <Text style={styles.btnText}>Delete</Text>
                               </TouchableOpacity>
                             )}
+     
+
                           </View>
                         </View>
                       )}
+                     
+
                     </View>
                   );
                 })}
             </View>
           );
         })}
+        
       </ScrollView>
+      {/* ===== GLOBAL GO TO QUIZ BUTTON ===== */}
+<TouchableOpacity
+  style={styles.globalQuizBtn}
+  onPress={() =>
+    navigation.navigate("LearningGame", {
+      studentId: student.id,
+    })
+  }
+>
+  <Text style={styles.globalQuizText}>
+    Go to Quiz 🎮
+  </Text>
+</TouchableOpacity>
+
     </Screen>
   );
 }
@@ -382,4 +435,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#fde68a",
     fontWeight: "600",
   },
+globalQuizBtn: {
+  marginTop: 16,
+  marginBottom: 20,
+  backgroundColor: COLORS.primary,
+  paddingVertical: 14,
+  borderRadius: 16,
+  alignItems: "center",
+},
+
+globalQuizText: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: "700",
+},
+
+
 });

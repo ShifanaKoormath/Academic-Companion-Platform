@@ -19,6 +19,7 @@ import RiskTimelineScreen from "../screens/RiskTimelineScreen";
 import StudyFocusScreen from "../screens/StudyFocusScreen";
 import ChatbotScreen from "../screens/ChatbotScreen";
 import NotesScreen from "../screens/NotesScreen";
+import LearningGameScreen from "../screens/LearningGameScreen";
 
 /* ================= PARAM TYPES ================= */
 
@@ -36,13 +37,23 @@ export type RootStackParamList = {
   Companion: { studentId: string };
   Todo: { studentId: string };
   ExamCountdown: { studentId: string };
-  RiskDetails: { studentId: string };
-  SubjectRisk: { studentId: string };
   StudyFocus: { studentId: string };
   Chatbot: { studentId: string };
-  Notes: { studentId: string };
-
-  /* Advanced analysis */
+Notes: {
+  studentId: string;
+  subject?: string;
+  module?: string;
+  topic?: string;
+};
+  LearningGame: {
+    studentId: string;
+    subject?: string;
+    module?: string;
+    topic?: string;
+  };
+  /* Risk & analysis */
+  RiskDetails: { studentId: string };
+  SubjectRisk: { studentId: string };
   RiskTimeline: {
     studentId: string;
     subjectCode: string;
@@ -65,11 +76,6 @@ export default function AppNavigator() {
         component={IntroScreen}
         options={{ headerShown: false }}
       />
-  <Stack.Screen
-  name="Chatbot"
-  component={ChatbotScreen}
-  options={{ title: "AI Query Assistant" }}
-/>
 
       <Stack.Screen
         name="Login"
@@ -126,6 +132,30 @@ export default function AppNavigator() {
         options={{ title: "Exam Countdown" }}
       />
 
+      <Stack.Screen
+        name="StudyFocus"
+        component={StudyFocusScreen}
+        options={{ title: "Study Focus" }}
+      />
+
+      <Stack.Screen
+        name="Notes"
+        component={NotesScreen}
+        options={{ title: "Notes" }}
+      />
+
+      <Stack.Screen
+        name="LearningGame"
+        component={LearningGameScreen}
+        options={{ title: "Learning Game" }}
+      />
+
+      <Stack.Screen
+        name="Chatbot"
+        component={ChatbotScreen}
+        options={{ title: "AI Query Assistant" }}
+      />
+
       {/* ================= RISK & INSIGHTS ================= */}
       <Stack.Screen
         name="RiskDetails"
@@ -144,18 +174,6 @@ export default function AppNavigator() {
         component={RiskTimelineScreen}
         options={{ title: "Risk Timeline" }}
       />
-
-      <Stack.Screen
-        name="StudyFocus"
-        component={StudyFocusScreen}
-        options={{ title: "Study Focus" }}
-      />
-      
-<Stack.Screen
-  name="Notes"
-  component={NotesScreen}
-  options={{ title: "Notes" }}
-/>
     </Stack.Navigator>
   );
 }
