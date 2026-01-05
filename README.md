@@ -224,6 +224,14 @@ src/
 - npm
 - Android phone (for mobile testing)
 
+```md
+## 📥 Clone the Repository
+
+Clone the project locally using Git:
+
+```bash
+git clone https://github.com/ShifanaKoormath/Academic-Companion-Platform
+cd academic-companion-app
 
 ### Install Dependencies
 
