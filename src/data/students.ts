@@ -254,4 +254,87 @@ export const STUDENTS: Student[] = [
       },
     ],
   },
+  /* =====================================================
+   STUDENT 4 — AVERAGE / SLIGHTLY AT RISK
+   ===================================================== */
+{
+  id: "s4",
+  name: "Geethika",
+  department: "Computer Science",
+  semester: 5,
+  demoPassword: "geethi123",
+
+  subjects: [
+    { code: "CN", name: "Computer Networks" },
+    { code: "OS", name: "Operating Systems" },
+    { code: "DBMS", name: "Database Management Systems" },
+  ],
+
+  attendance: [
+    { subjectCode: "CN", classesConducted: 44, classesAttended: 33 },
+    { subjectCode: "OS", classesConducted: 44, classesAttended: 35 },
+    { subjectCode: "DBMS", classesConducted: 44, classesAttended: 34 },
+  ],
+
+  assignments: [
+    {
+      id: "s4-cn-a1",
+      type: "Assignment",
+      subjectCode: "CN",
+      title: "TCP/IP Protocol Study",
+      maxMarks: 15,
+      dueDate: "2025-01-20",
+    },
+    {
+      id: "s4-os-t1",
+      type: "Tutorial",
+      subjectCode: "OS",
+      title: "Process Scheduling",
+      maxMarks: 15,
+      dueDate: "2025-01-27",
+    },
+    {
+      id: "s4-dbms-a1",
+      type: "Assignment",
+      subjectCode: "DBMS",
+      title: "ER Diagram Design",
+      maxMarks: 15,
+      dueDate: "2025-02-01",
+    },
+  ],
+
+  examPeriods: [
+    {
+      type: "Series 1",
+      startDate: "2025-02-10",
+      endDate: "2025-02-15",
+      papers: [
+        { subjectCode: "CN", date: "2025-02-10", maxMarks: 50, scoredMarks: 34 },
+        { subjectCode: "OS", date: "2025-02-12", maxMarks: 50, scoredMarks: 36 },
+        { subjectCode: "DBMS", date: "2025-02-14", maxMarks: 50, scoredMarks: 38 },
+      ],
+    },
+    {
+      type: "Series 2",
+      startDate: "2025-03-05",
+      endDate: "2025-03-10",
+      papers: [
+        { subjectCode: "CN", date: "2025-03-05", maxMarks: 50 },
+        { subjectCode: "OS", date: "2025-03-07", maxMarks: 50 },
+        { subjectCode: "DBMS", date: "2025-03-09", maxMarks: 50 },
+      ],
+    },
+    {
+      type: "Final",
+      startDate: "2025-04-20",
+      endDate: "2025-04-30",
+      papers: [
+        { subjectCode: "CN", date: "2025-04-20", maxMarks: 100 },
+        { subjectCode: "OS", date: "2025-04-23", maxMarks: 100 },
+        { subjectCode: "DBMS", date: "2025-04-26", maxMarks: 100 },
+      ],
+    },
+  ],
+},
+
 ];

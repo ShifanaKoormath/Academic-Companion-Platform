@@ -18,6 +18,7 @@ import SubjectRiskScreen from "../screens/SubjectRiskScreen";
 import RiskTimelineScreen from "../screens/RiskTimelineScreen";
 import StudyFocusScreen from "../screens/StudyFocusScreen";
 import ChatbotScreen from "../screens/ChatbotScreen";
+import NotesScreen from "../screens/NotesScreen";
 
 /* ================= PARAM TYPES ================= */
 
@@ -39,6 +40,7 @@ export type RootStackParamList = {
   SubjectRisk: { studentId: string };
   StudyFocus: { studentId: string };
   Chatbot: { studentId: string };
+  Notes: { studentId: string };
 
   /* Advanced analysis */
   RiskTimeline: {
@@ -148,6 +150,12 @@ export default function AppNavigator() {
         component={StudyFocusScreen}
         options={{ title: "Study Focus" }}
       />
+      
+<Stack.Screen
+  name="Notes"
+  component={NotesScreen}
+  options={{ title: "Notes" }}
+/>
     </Stack.Navigator>
   );
 }

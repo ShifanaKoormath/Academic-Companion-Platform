@@ -161,7 +161,7 @@ export default function DashboardScreen({ route, navigation }: any) {
           />
         </View>
 
-        {/* ---------- STUDY FOCUS CTA ---------- */}
+        {/* ---------- STUDY FOCUS ---------- */}
         <Text style={styles.sectionTitle}>
           Study Planning
         </Text>
@@ -186,6 +186,23 @@ export default function DashboardScreen({ route, navigation }: any) {
         <Text style={styles.sectionTitle}>
           Academic Modules
         </Text>
+
+        {/* ✅ Personal Notes */}
+        <TouchableOpacity
+          style={styles.navCard}
+          onPress={() =>
+            navigation.navigate("Notes", {
+              studentId: student.id,
+            })
+          }
+        >
+          <Text style={styles.navText}>
+            Personal Notes
+          </Text>
+          <Text style={styles.navSub}>
+            Syllabus-wise revision notes
+          </Text>
+        </TouchableOpacity>
 
         {[
           ["Tasks", "Tasks"],
@@ -381,5 +398,11 @@ const styles = StyleSheet.create({
   navText: {
     fontSize: 15,
     fontWeight: "500",
+  },
+
+  navSub: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    marginTop: 4,
   },
 });

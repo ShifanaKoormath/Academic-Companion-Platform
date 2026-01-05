@@ -33,80 +33,120 @@ export default function LoginScreen({ navigation }: any) {
   }
 
   return (
-    <Screen>
-      {/* ---------- HEADER ---------- */}
-      <Text style={styles.title}>Student Login</Text>
+    <Screen scroll={false}>
+      {/* ================= BRAND HEADER ================= */}
+      <View style={styles.header}>
+        <Text style={styles.brand}>Acadmate</Text>
+        <Text style={styles.tagline}>
+          Academic Companion Platform
+        </Text>
+      </View>
 
-      <Text style={styles.subtitle}>
-        Sign in to access your academic dashboard
-      </Text>
+      {/* ================= LOGIN CARD ================= */}
+      <View style={styles.card}>
+        <Text style={styles.title}>Student Login</Text>
+        <Text style={styles.subtitle}>
+          Sign in to access your academic dashboard
+        </Text>
 
-      {/* ---------- INPUTS ---------- */}
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        autoCapitalize="none"
-        value={username}
-        onChangeText={setUsername}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor={COLORS.muted}
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize="none"
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={COLORS.muted}
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
 
-      {/* ---------- ERROR ---------- */}
-      {error ? (
-        <Text style={styles.error}>{error}</Text>
-      ) : null}
+        {error ? (
+          <Text style={styles.error}>{error}</Text>
+        ) : null}
 
-      {/* ---------- ACTION ---------- */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogin}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-
-      {/* ---------- FOOTNOTE ---------- */}
-      <Text style={styles.hint}>
-        Authorized access only
-      </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLogin}
+          activeOpacity={0.85}
+        >
+          <Text style={styles.buttonText}>
+            Login
+          </Text>
+        </TouchableOpacity>
+      </View>
     </Screen>
   );
 }
 
+/* ================= STYLES ================= */
+
 const styles = StyleSheet.create({
+  header: {
+    alignItems: "center",
+    marginTop: 40,
+    marginBottom: 36,
+  },
+
+  brand: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: COLORS.primary,
+    letterSpacing: 0.4,
+  },
+
+  tagline: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    marginTop: 6,
+  },
+
+  card: {
+    backgroundColor: COLORS.card,
+    borderRadius: 20,
+    padding: 22,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
+  },
+
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "700",
     color: COLORS.textPrimary,
-    marginBottom: 6,
   },
 
   subtitle: {
     fontSize: 13,
     color: COLORS.textSecondary,
+    marginTop: 6,
     marginBottom: 20,
   },
 
   input: {
-    backgroundColor: COLORS.card,
+    backgroundColor: COLORS.background,
     padding: 14,
     borderRadius: 12,
-    marginBottom: 12,
     fontSize: 14,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: COLORS.muted,
+    color: COLORS.textPrimary,
   },
 
   button: {
-    marginTop: 10,
     backgroundColor: COLORS.primary,
     paddingVertical: 14,
     borderRadius: 14,
     alignItems: "center",
+    marginTop: 6,
   },
 
   buttonText: {
@@ -116,15 +156,8 @@ const styles = StyleSheet.create({
   },
 
   error: {
-    color: COLORS.danger,
     fontSize: 12,
-    marginBottom: 6,
-  },
-
-  hint: {
-    fontSize: 11,
-    color: COLORS.textSecondary,
-    marginTop: 16,
-    textAlign: "center",
+    color: COLORS.danger,
+    marginBottom: 8,
   },
 });
